@@ -1,0 +1,810 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KRZ Tech — Tecnología al alcance de cualquier negocio</title>
+<meta name="description" content="Soluciones tecnológicas para comercios y empresas del interior. MiCaja POS y Pedidos360.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,300&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* ══════════════════════════════════
+   TOKENS
+══════════════════════════════════ */
+:root {
+  --navy:    #0f2444;
+  --navy-m:  #1a4a8a;
+  --navy-l:  #e8f0fb;
+  --orange:  #e07b2a;
+  --orange-l:#fdf0e3;
+  --cream:   #faf8f4;
+  --stone:   #f0ece4;
+  --border:  #e2ddd4;
+  --text:    #1a1714;
+  --muted:   #7a7060;
+  --light:   #b0a898;
+  --white:   #ffffff;
+
+  --ff-serif: 'Instrument Serif', Georgia, serif;
+  --ff-sans:  'DM Sans', sans-serif;
+  --ff-mono:  'DM Mono', monospace;
+
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ══════════════════════════════════
+   BASE
+══════════════════════════════════ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; font-size: 16px; }
+
+body {
+  font-family: var(--ff-sans);
+  background: var(--cream);
+  color: var(--text);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+::selection { background: var(--navy-m); color: #fff; }
+
+img { display: block; max-width: 100%; }
+a { color: inherit; text-decoration: none; }
+
+/* ══════════════════════════════════
+   NAV
+══════════════════════════════════ */
+nav {
+  position: fixed; top: 0; left: 0; right: 0;
+  z-index: 100;
+  display: flex; align-items: center;
+  padding: 0 5vw;
+  height: 64px;
+  background: rgba(250, 248, 244, 0.85);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.3s, background 0.3s;
+}
+nav.scrolled { border-color: var(--border); }
+
+.nav-logo {
+  font-family: var(--ff-sans);
+  font-weight: 700;
+  font-size: 17px;
+  color: var(--navy);
+  letter-spacing: -0.3px;
+  display: flex; align-items: center; gap: 8px;
+}
+.nav-logo-dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--orange);
+}
+.nav-spacer { flex: 1; }
+.nav-links {
+  display: flex; align-items: center; gap: 32px;
+  list-style: none;
+}
+.nav-links a {
+  font-size: 14px; font-weight: 500;
+  color: var(--muted);
+  transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--navy); }
+
+.nav-cta {
+  background: var(--navy);
+  color: #fff !important;
+  padding: 8px 20px;
+  border-radius: 99px;
+  font-size: 14px !important;
+  font-weight: 600 !important;
+  transition: background 0.2s, transform 0.2s !important;
+}
+.nav-cta:hover { background: var(--navy-m) !important; transform: translateY(-1px); }
+
+/* ══════════════════════════════════
+   HERO
+══════════════════════════════════ */
+.hero {
+  min-height: 100vh;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  padding: 120px 5vw 80px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Fondo geométrico sutil */
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 80% 60% at 20% 20%, rgba(26,74,138,0.06) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 50% at 80% 80%, rgba(224,123,42,0.05) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+.hero-tag {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: var(--navy-l);
+  color: var(--navy-m);
+  font-size: 12px; font-weight: 600;
+  letter-spacing: 1.2px; text-transform: uppercase;
+  padding: 6px 14px; border-radius: 99px;
+  margin-bottom: 32px;
+  border: 1px solid rgba(26,74,138,0.15);
+  animation: fadeUp 0.6s var(--ease-out) 0.1s both;
+}
+.hero-tag-dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--navy-m);
+  animation: pulse 2s ease infinite;
+}
+@keyframes pulse {
+  0%,100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(0.7); }
+}
+
+.hero-title {
+  font-family: var(--ff-serif);
+  font-size: clamp(42px, 7vw, 88px);
+  line-height: 1.05;
+  letter-spacing: -1px;
+  color: var(--navy);
+  max-width: 800px;
+  animation: fadeUp 0.7s var(--ease-out) 0.2s both;
+}
+.hero-title em {
+  font-style: italic;
+  color: var(--orange);
+}
+
+.hero-sub {
+  font-size: clamp(16px, 2vw, 20px);
+  color: var(--muted);
+  font-weight: 400;
+  max-width: 540px;
+  margin: 24px auto 0;
+  line-height: 1.6;
+  animation: fadeUp 0.7s var(--ease-out) 0.3s both;
+}
+
+.hero-actions {
+  display: flex; align-items: center; gap: 16px;
+  margin-top: 48px;
+  flex-wrap: wrap; justify-content: center;
+  animation: fadeUp 0.7s var(--ease-out) 0.4s both;
+}
+
+.btn-primary {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: var(--navy);
+  color: #fff;
+  padding: 14px 28px;
+  border-radius: 99px;
+  font-size: 15px; font-weight: 600;
+  transition: all 0.2s var(--ease-out);
+  border: 2px solid var(--navy);
+}
+.btn-primary:hover {
+  background: var(--navy-m);
+  border-color: var(--navy-m);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(15,36,68,0.2);
+}
+.btn-secondary {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: transparent;
+  color: var(--navy);
+  padding: 14px 28px;
+  border-radius: 99px;
+  font-size: 15px; font-weight: 600;
+  border: 2px solid var(--border);
+  transition: all 0.2s var(--ease-out);
+}
+.btn-secondary:hover {
+  border-color: var(--navy);
+  transform: translateY(-2px);
+}
+
+/* Scroll indicator */
+.hero-scroll {
+  position: absolute; bottom: 36px; left: 50%;
+  transform: translateX(-50%);
+  display: flex; flex-direction: column; align-items: center; gap: 6px;
+  animation: fadeUp 1s var(--ease-out) 0.8s both;
+}
+.scroll-line {
+  width: 1px; height: 40px;
+  background: linear-gradient(to bottom, var(--border), transparent);
+  animation: scrollLine 1.5s ease infinite;
+}
+@keyframes scrollLine {
+  0% { transform: scaleY(0); transform-origin: top; opacity: 0; }
+  50% { transform: scaleY(1); opacity: 1; }
+  100% { transform: scaleY(0); transform-origin: bottom; opacity: 0; }
+}
+
+/* ══════════════════════════════════
+   SECTION BASE
+══════════════════════════════════ */
+section { padding: 100px 5vw; }
+
+.section-tag {
+  font-size: 11px; font-weight: 600;
+  letter-spacing: 2px; text-transform: uppercase;
+  color: var(--orange);
+  margin-bottom: 16px;
+  display: flex; align-items: center; gap: 8px;
+}
+.section-tag::before {
+  content: '';
+  display: block;
+  width: 24px; height: 1px;
+  background: var(--orange);
+}
+
+.section-title {
+  font-family: var(--ff-serif);
+  font-size: clamp(32px, 4vw, 52px);
+  line-height: 1.1;
+  color: var(--navy);
+  letter-spacing: -0.5px;
+}
+.section-title em { font-style: italic; color: var(--orange); }
+
+.section-sub {
+  font-size: 17px; color: var(--muted);
+  font-weight: 400; line-height: 1.6;
+  max-width: 520px;
+  margin-top: 16px;
+}
+
+/* ══════════════════════════════════
+   PRODUCTOS
+══════════════════════════════════ */
+#productos {
+  background: var(--white);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+
+.productos-header {
+  text-align: center; margin-bottom: 72px;
+}
+.productos-header .section-tag { justify-content: center; }
+.productos-header .section-tag::before { display: none; }
+
+.productos-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  max-width: 1080px;
+  margin: 0 auto;
+}
+
+.producto-card {
+  border-radius: 20px;
+  padding: 48px 44px;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.3s var(--ease-out), box-shadow 0.3s;
+}
+.producto-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 24px 60px rgba(0,0,0,0.1);
+}
+
+.producto-card.navy {
+  background: var(--navy);
+  color: #fff;
+}
+.producto-card.cream {
+  background: var(--stone);
+  border: 1px solid var(--border);
+}
+
+/* Decoración geométrica en las cards */
+.producto-card::after {
+  content: '';
+  position: absolute;
+  right: -40px; top: -40px;
+  width: 200px; height: 200px;
+  border-radius: 50%;
+  border: 1px solid rgba(255,255,255,0.08);
+  pointer-events: none;
+}
+.producto-card.cream::after { border-color: rgba(0,0,0,0.04); }
+
+.prod-tag {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 11px; font-weight: 600;
+  letter-spacing: 1.5px; text-transform: uppercase;
+  padding: 5px 12px; border-radius: 99px;
+  margin-bottom: 28px;
+}
+.navy .prod-tag { background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.7); }
+.cream .prod-tag { background: var(--navy-l); color: var(--navy-m); }
+
+.prod-name {
+  font-family: var(--ff-serif);
+  font-size: 40px; line-height: 1;
+  letter-spacing: -1px;
+  margin-bottom: 16px;
+}
+.navy .prod-name { color: #fff; }
+.navy .prod-name span { color: var(--orange); }
+.cream .prod-name { color: var(--navy); }
+.cream .prod-name span { color: var(--orange); }
+
+.prod-desc {
+  font-size: 15px; line-height: 1.6;
+  margin-bottom: 36px;
+}
+.navy .prod-desc { color: rgba(255,255,255,0.65); }
+.cream .prod-desc { color: var(--muted); }
+
+.prod-features {
+  list-style: none;
+  display: flex; flex-direction: column; gap: 10px;
+  margin-bottom: 40px;
+}
+.prod-features li {
+  display: flex; align-items: center; gap: 10px;
+  font-size: 14px; font-weight: 500;
+}
+.navy .prod-features li { color: rgba(255,255,255,0.8); }
+.cream .prod-features li { color: var(--text); }
+.feat-check {
+  width: 18px; height: 18px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0; font-size: 10px;
+}
+.navy .feat-check { background: rgba(255,255,255,0.12); color: rgba(255,255,255,0.9); }
+.cream .feat-check { background: var(--navy-l); color: var(--navy-m); }
+
+.prod-cta {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-size: 14px; font-weight: 600;
+  padding: 12px 24px; border-radius: 99px;
+  transition: all 0.2s var(--ease-out);
+}
+.navy .prod-cta {
+  background: var(--orange);
+  color: #fff;
+}
+.navy .prod-cta:hover { background: #c86a1a; transform: translateY(-1px); }
+.cream .prod-cta {
+  background: var(--navy);
+  color: #fff;
+}
+.cream .prod-cta:hover { background: var(--navy-m); transform: translateY(-1px); }
+
+/* ══════════════════════════════════
+   POR QUÉ KRZ
+══════════════════════════════════ */
+#porque {
+  background: var(--cream);
+}
+
+.porque-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+  max-width: 1080px;
+  margin: 0 auto;
+}
+
+.porque-pillars {
+  display: flex; flex-direction: column; gap: 32px;
+}
+
+.pillar {
+  display: flex; gap: 20px;
+  align-items: flex-start;
+}
+.pillar-num {
+  font-family: var(--ff-mono);
+  font-size: 12px; font-weight: 500;
+  color: var(--orange);
+  padding-top: 3px;
+  min-width: 28px;
+}
+.pillar-title {
+  font-size: 16px; font-weight: 600;
+  color: var(--navy); margin-bottom: 6px;
+}
+.pillar-desc {
+  font-size: 14px; color: var(--muted); line-height: 1.6;
+}
+
+/* Stats */
+.porque-stats {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 20px;
+}
+.stat-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 28px 24px;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.stat-card:hover { transform: translateY(-3px); box-shadow: 0 12px 32px rgba(0,0,0,0.06); }
+.stat-card:first-child {
+  grid-column: span 2;
+  background: var(--navy);
+  border-color: var(--navy);
+}
+.stat-num {
+  font-family: var(--ff-serif);
+  font-size: 48px; line-height: 1;
+  letter-spacing: -1px;
+  color: var(--navy); margin-bottom: 8px;
+}
+.stat-card:first-child .stat-num { color: var(--orange); }
+.stat-label {
+  font-size: 13px; color: var(--muted); font-weight: 500;
+}
+.stat-card:first-child .stat-label { color: rgba(255,255,255,0.6); }
+
+/* ══════════════════════════════════
+   CONTACTO
+══════════════════════════════════ */
+#contacto {
+  background: var(--navy);
+  text-align: center;
+}
+
+#contacto .section-tag { justify-content: center; color: rgba(255,255,255,0.5); }
+#contacto .section-tag::before { background: rgba(255,255,255,0.3); }
+#contacto .section-title { color: #fff; }
+#contacto .section-sub { color: rgba(255,255,255,0.55); margin: 16px auto 0; }
+
+.contact-actions {
+  display: flex; align-items: center; justify-content: center;
+  gap: 16px; margin-top: 48px; flex-wrap: wrap;
+}
+
+.btn-whatsapp {
+  display: inline-flex; align-items: center; gap: 10px;
+  background: #25D366;
+  color: #fff;
+  padding: 16px 32px;
+  border-radius: 99px;
+  font-size: 16px; font-weight: 700;
+  transition: all 0.2s var(--ease-out);
+  letter-spacing: -0.2px;
+}
+.btn-whatsapp:hover {
+  background: #20bd5a;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 32px rgba(37,211,102,0.35);
+}
+.btn-instagram {
+  display: inline-flex; align-items: center; gap: 10px;
+  background: rgba(255,255,255,0.08);
+  color: rgba(255,255,255,0.85);
+  padding: 16px 32px;
+  border-radius: 99px;
+  font-size: 16px; font-weight: 600;
+  border: 1px solid rgba(255,255,255,0.15);
+  transition: all 0.2s var(--ease-out);
+}
+.btn-instagram:hover {
+  background: rgba(255,255,255,0.14);
+  transform: translateY(-2px);
+}
+
+.contact-note {
+  margin-top: 24px;
+  font-size: 13px;
+  color: rgba(255,255,255,0.35);
+  font-weight: 400;
+}
+
+/* ══════════════════════════════════
+   FOOTER
+══════════════════════════════════ */
+footer {
+  background: #0a1a30;
+  padding: 32px 5vw;
+  display: flex; align-items: center; justify-content: space-between;
+  flex-wrap: wrap; gap: 12px;
+}
+.footer-logo {
+  font-weight: 700; font-size: 15px;
+  color: rgba(255,255,255,0.5);
+  display: flex; align-items: center; gap: 8px;
+}
+.footer-logo span { color: var(--orange); }
+.footer-text {
+  font-size: 13px; color: rgba(255,255,255,0.25);
+}
+
+/* ══════════════════════════════════
+   ANIMATIONS
+══════════════════════════════════ */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.reveal {
+  opacity: 0; transform: translateY(32px);
+  transition: opacity 0.7s var(--ease-out), transform 0.7s var(--ease-out);
+}
+.reveal.visible { opacity: 1; transform: translateY(0); }
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.3s; }
+.reveal-delay-4 { transition-delay: 0.4s; }
+
+/* ══════════════════════════════════
+   RESPONSIVE
+══════════════════════════════════ */
+@media (max-width: 768px) {
+  .nav-links { display: none; }
+  .productos-grid { grid-template-columns: 1fr; }
+  .porque-layout { grid-template-columns: 1fr; gap: 48px; }
+  .porque-stats { grid-template-columns: 1fr 1fr; }
+  .stat-card:first-child { grid-column: span 2; }
+  .producto-card { padding: 36px 28px; }
+  section { padding: 72px 6vw; }
+}
+
+@media (max-width: 480px) {
+  .hero-actions { flex-direction: column; width: 100%; }
+  .btn-primary, .btn-secondary { width: 100%; justify-content: center; }
+  .contact-actions { flex-direction: column; width: 100%; }
+  .btn-whatsapp, .btn-instagram { width: 100%; justify-content: center; }
+}
+</style>
+</head>
+<body>
+
+<!-- ══ NAV ══ -->
+<nav id="navbar">
+  <div class="nav-logo">
+    <div class="nav-logo-dot"></div>
+    KRZ Tech
+  </div>
+  <div class="nav-spacer"></div>
+  <ul class="nav-links">
+    <li><a href="#productos">Productos</a></li>
+    <li><a href="#porque">Nosotros</a></li>
+    <li><a href="#contacto" class="nav-cta">Contacto</a></li>
+  </ul>
+</nav>
+
+<!-- ══ HERO ══ -->
+<section class="hero">
+  <div class="hero-tag">
+    <div class="hero-tag-dot"></div>
+    Córdoba, Argentina
+  </div>
+  <h1 class="hero-title">
+    Tecnología que llega<br>
+    <em>donde la necesitás</em>
+  </h1>
+  <p class="hero-sub">
+    Desarrollamos software para comercios y empresas del interior. Simple, accesible y sin vueltas.
+  </p>
+  <div class="hero-actions">
+    <a href="#productos" class="btn-primary">
+      Ver productos
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M7 2l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </a>
+    <a href="#contacto" class="btn-secondary">Hablar con nosotros</a>
+  </div>
+  <div class="hero-scroll">
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- ══ PRODUCTOS ══ -->
+<section id="productos">
+  <div class="productos-header reveal">
+    <div class="section-tag">Productos</div>
+    <h2 class="section-title">Dos soluciones,<br><em>un solo equipo</em></h2>
+    <p class="section-sub" style="margin: 16px auto 0; text-align:center">Cada producto está pensado para resolver un problema real de negocios reales.</p>
+  </div>
+
+  <div class="productos-grid">
+    <!-- MiCaja -->
+    <div class="producto-card navy reveal reveal-delay-1">
+      <div class="prod-tag">
+        <svg width="10" height="10" viewBox="0 0 10 10" fill="currentColor"><circle cx="5" cy="5" r="5"/></svg>
+        Punto de venta
+      </div>
+      <div class="prod-name">Mi<span>Caja</span></div>
+      <p class="prod-desc">
+        Sistema de caja registradora para despensas, kioscos y almacenes. Sin internet, sin suscripciones, instalado en tu computadora.
+      </p>
+      <ul class="prod-features">
+        <li>
+          <div class="feat-check">✓</div>
+          Escáner de código de barras
+        </li>
+        <li>
+          <div class="feat-check">✓</div>
+          Control de stock automático
+        </li>
+        <li>
+          <div class="feat-check">✓</div>
+          Tickets e impresión térmica
+        </li>
+        <li>
+          <div class="feat-check">✓</div>
+          Historial de ventas y reportes
+        </li>
+        <li>
+          <div class="feat-check">✓</div>
+          Backup automático de datos
+        </li>
+      </ul>
+      <a href="#contacto" class="prod-cta">
+        Quiero MiCaja
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M7 2l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+    </div>
+
+    <!-- Pedidos360 -->
+    <div class="producto-card cream reveal reveal-delay-2">
+      <div class="prod-tag">
+        <svg width="10" height="10" viewBox="0 0 10 10" fill="currentColor"><circle cx="5" cy="5" r="5"/></svg>
+        Gestión de pedidos
+      </div>
+      <div class="prod-name">Pedidos<span>360</span></div>
+      <p class="prod-desc">
+        Sistema para empresas con vendedores en calle. Tomá pedidos desde el celular, aprobá desde la oficina y despachá desde el depósito.
+      </p>
+      <ul class="prod-features">
+        <li>
+          <div class="feat-check">✓</div>
+          App mobile para vendedores
+        </li>
+        <li>
+          <div class="feat-check">✓</div>
+          Dashboard en tiempo real
+        </li>
+        <li>
+          <div class="feat-check">✓</div>
+          Roles: vendedor, supervisor, depósito
+        </li>
+        <li>
+          <div class="feat-check">✓</div>
+          Control de stock con semáforo
+        </li>
+        <li>
+          <div class="feat-check">✓</div>
+          Historial completo por vendedor
+        </li>
+      </ul>
+      <a href="#contacto" class="prod-cta">
+        Quiero Pedidos360
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M7 2l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ══ POR QUÉ KRZ ══ -->
+<section id="porque">
+  <div class="porque-layout">
+    <div>
+      <div class="section-tag reveal">Por qué KRZ Tech</div>
+      <h2 class="section-title reveal reveal-delay-1">Software hecho<br><em>para el interior</em></h2>
+      <p class="section-sub reveal reveal-delay-2">
+        No somos una empresa de capital. Somos de acá y entendemos los problemas reales de los negocios del interior.
+      </p>
+
+      <div class="porque-pillars" style="margin-top: 48px;">
+        <div class="pillar reveal reveal-delay-1">
+          <div class="pillar-num">01</div>
+          <div>
+            <div class="pillar-title">Precio accesible</div>
+            <p class="pillar-desc">Sin suscripciones ni costos ocultos. Pagás una vez y el sistema es tuyo para siempre.</p>
+          </div>
+        </div>
+        <div class="pillar reveal reveal-delay-2">
+          <div class="pillar-num">02</div>
+          <div>
+            <div class="pillar-title">Soporte cercano</div>
+            <p class="pillar-desc">Te atendemos por WhatsApp, no por un call center. Hablás con la misma persona que instaló el sistema.</p>
+          </div>
+        </div>
+        <div class="pillar reveal reveal-delay-3">
+          <div class="pillar-num">03</div>
+          <div>
+            <div class="pillar-title">Simple desde el primer día</div>
+            <p class="pillar-desc">No hace falta saber de tecnología. Lo instalamos, lo configuramos y te enseñamos a usarlo.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="porque-stats reveal reveal-delay-2">
+      <div class="stat-card">
+        <div class="stat-num">100%</div>
+        <div class="stat-label">Local — de Córdoba para el interior</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">0</div>
+        <div class="stat-label">Costos mensuales en MiCaja</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">2</div>
+        <div class="stat-label">Productos activos y en evolución</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ CONTACTO ══ -->
+<section id="contacto">
+  <div class="section-tag reveal">Hablemos</div>
+  <h2 class="section-title reveal reveal-delay-1">¿Te interesa<br><em>alguno de los productos?</em></h2>
+  <p class="section-sub reveal reveal-delay-2">
+    Escribinos por WhatsApp y te contamos todo. Sin compromiso.
+  </p>
+  <div class="contact-actions reveal reveal-delay-3">
+    <a href="https://wa.me/543548500562?text=Hola!%20Vi%20su%20p%C3%A1gina%20y%20me%20interesa%20saber%20m%C3%A1s%20sobre%20sus%20productos." class="btn-whatsapp" target="_blank" rel="noopener">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      WhatsApp — 3548 500562
+    </a>
+    <a href="https://instagram.com/krztech" class="btn-instagram" target="_blank" rel="noopener">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+      @krztech
+    </a>
+  </div>
+  <p class="contact-note reveal reveal-delay-4">Respondemos en menos de 24 horas · Zona: Córdoba y provincias</p>
+</section>
+
+<!-- ══ FOOTER ══ -->
+<footer>
+  <div class="footer-logo">
+    KRZ <span>Tech</span>
+  </div>
+  <div class="footer-text">
+    © 2025 KRZ Tech · Soluciones Tecnológicas · Córdoba, Argentina
+  </div>
+</footer>
+
+<script>
+// Nav scroll effect
+const navbar = document.getElementById('navbar');
+window.addEventListener('scroll', () => {
+  navbar.classList.toggle('scrolled', window.scrollY > 20);
+}, { passive: true });
+
+// Reveal on scroll
+const reveals = document.querySelectorAll('.reveal');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('visible');
+      observer.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+reveals.forEach(el => observer.observe(el));
+
+// Smooth anchor scroll
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    const target = document.querySelector(a.getAttribute('href'));
+    if (target) {
+      e.preventDefault();
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  });
+});
+</script>
+</body>
+</html>
