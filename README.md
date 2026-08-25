@@ -1,64 +1,56 @@
 # KRZTech Landing
 
-Landing institucional y comercial de KRZTech. Presenta la empresa, sus
-productos y el canal de contacto para solicitar una demostración.
+Landing institucional y comercial de KRZTech. El sitio presenta la empresa, sus productos principales y el canal de contacto para solicitar una demostración.
 
-> **Estado productivo:** el sitio está publicado mediante Vercel. Todo cambio
-> debe realizarse en una rama y revisarse mediante Pull Request antes de llegar
-> a `main`. El repositorio no requiere build ni contiene lógica de backend.
+> **Estado productivo:** publicado mediante Vercel. Todo cambio debe realizarse en una rama, validarse mediante Pull Request y recién después llegar a `main`. El proyecto es estático: no requiere build ni backend.
 
 ## Objetivo
 
-La landing debe transmitir una propuesta sencilla:
+La landing debe explicar de forma simple qué resuelve KRZTech y convertir visitas en consultas.
 
-> Software práctico para que comercios y PyMEs vendan, controlen y trabajen con
-> menos complejidad.
+La comunicación principal se apoya en dos productos estrella:
 
-El objetivo principal no es describir tecnología, sino generar confianza,
-explicar los productos con claridad y convertir visitas en consultas o
-solicitudes de demostración.
+### MiReserva
 
-## Productos de KRZTech
+Sistema de gestión para hosterías, hoteles pequeños y otros alojamientos.
 
-La comunicación institucional se concentra actualmente en:
+Funciones que pueden comunicarse públicamente:
+
+- disponibilidad y calendario por habitación;
+- reservas de una o varias habitaciones;
+- huéspedes, check-in y check-out;
+- pagos, devoluciones, saldos y comprobantes internos;
+- habitaciones, limpieza, bloqueos e incidentes;
+- tarifas base y períodos especiales;
+- comunicaciones de llegada y agradecimiento por WhatsApp o email;
+- alertas operativas y comunicaciones pendientes.
+
+La landing usa una **vista demostrativa construida en HTML/CSS con datos ficticios** para mostrar el dashboard de MiReserva. Debe permanecer identificada como “Datos de ejemplo” y no presentarse como información de un cliente real.
+
+Aplicación: `https://mireserva.krztech.online`.
 
 ### MiCaja
 
-Sistema de punto de venta y gestión comercial para ventas, caja, productos,
-stock, compras, clientes y reportes.
+Sistema de punto de venta y gestión comercial para ventas, productos, stock, precios, caja y reportes.
 
-- **MiCaja Escritorio / Local:** orientada a una computadora o comercio que
-  necesita operar aun con conectividad limitada.
-- **MiCaja Web / Online:** permite acceso desde distintos dispositivos,
-  información centralizada y operación con múltiples usuarios o cajas.
+- **MiCaja Local:** orientada a una computadora o comercio que necesita operar aun con conectividad limitada.
+- **MiCaja Online:** permite acceso desde distintos dispositivos, información centralizada y operación con múltiples usuarios o cajas.
 
-La aplicación web se presenta en `https://micaja.krztech.online`.
+Aplicación web: `https://micaja.krztech.online`.
 
 ### Pedidos360
 
-Solución para equipos comerciales con vendedores en calle. El flujo comunicado
-es:
+Pedidos360 se mantiene como producto secundario dentro de la landing. Su propuesta es ordenar el flujo:
 
 ```text
 Vendedor → Administración → Depósito
 ```
 
-El vendedor carga el pedido desde el celular, administración lo recibe y
-controla, y depósito continúa con la preparación.
-
-La captura de Pedidos360 incluida en la landing es una **vista ilustrativa** y
-no debe presentarse como una captura contractual o como evidencia de funciones
-que todavía no hayan sido verificadas.
+La imagen incluida es una **vista ilustrativa** y no debe presentarse como una captura contractual ni como prueba de funciones no verificadas.
 
 ## Alcance de la marca
 
-No presentar como productos existentes de KRZTech servicios o sistemas que no
-estén aprobados. En particular, no agregar por iniciativa propia APIs,
-helpdesk, BI, n8n, CRM u otros desarrollos internos como si fueran productos
-comerciales.
-
-Las soluciones a medida pueden mencionarse como capacidad general, sin afirmar
-funciones, integraciones, precios, clientes o resultados no comprobados.
+No presentar como productos existentes servicios o sistemas que no estén aprobados. Las soluciones a medida pueden mencionarse como capacidad general, sin inventar funciones, clientes, métricas, precios o resultados.
 
 ## Estructura
 
@@ -74,17 +66,13 @@ KrzTech/
 
 - `KrzTech/Landing/index.html`: sitio completo, con HTML, CSS y JavaScript.
 - `assets/micaja-dashboard.png`: captura real del dashboard de MiCaja.
-- `assets/micaja-punto-venta.png`: captura real del punto de venta; debe
-  permanecer anonimizada.
+- `assets/micaja-punto-venta.png`: captura real del punto de venta.
 - `assets/pedidos360-demo.png`: representación ilustrativa de Pedidos360.
+- MiReserva no depende de una imagen externa: su dashboard demostrativo está construido dentro del HTML para mostrar datos ficticios de forma segura.
 
-Vercel debe servir `KrzTech/Landing` como directorio raíz del sitio. El archivo
-de entrada debe llamarse exactamente `index.html`; no subir versiones con
-nombres alternativos al directorio productivo.
+Vercel debe servir `KrzTech/Landing` como directorio raíz y `index.html` como archivo de entrada.
 
 ## Identidad visual
-
-La nueva landing es la fuente de verdad para futuras piezas de comunicación.
 
 | Uso | Valor |
 | --- | --- |
@@ -100,37 +88,34 @@ La nueva landing es la fuente de verdad para futuras piezas de comunicación.
 Reglas:
 
 - usar la marca escrita **KRZTech** con el tratamiento existente;
-- no inventar isotipos, monogramas o logos alternativos;
-- priorizar fondos crema, azul marino y acentos naranjas;
-- usar capturas grandes, legibles y con poco margen vacío;
-- mantener una estética clara, editorial y profesional;
-- evitar diseños genéricos de “tecnología futurista”, exceso de neón o textos
-  pequeños.
+- priorizar MiReserva y MiCaja en el hero, la sección de productos y el footer;
+- mantener fondos crema, azul marino y acentos naranjas;
+- usar capturas o demos grandes, legibles y con poco margen vacío;
+- evitar estética genérica de “tecnología futurista”, neón o textos demasiado pequeños;
+- identificar claramente cualquier dato ficticio o imagen ilustrativa.
 
 ## Contenido y conversiones
 
-Las llamadas a la acción principales son:
+CTA principales:
 
-- solicitar una demo;
+- solicitar una demo de MiReserva;
 - conocer MiCaja;
-- conocer Pedidos360;
+- solicitar una demo general;
 - conversar por WhatsApp.
 
 Antes de publicar, revisar:
 
 - número y enlaces de WhatsApp;
 - usuario y enlace de Instagram;
-- dominio de MiCaja;
+- dominios de MiReserva y MiCaja;
 - títulos, metadescripción y Open Graph;
 - que las afirmaciones correspondan a funciones reales;
-- que no haya nombres, emails o datos personales en las capturas.
+- que las capturas no contengan datos personales reales;
+- que la demo de MiReserva siga rotulada como datos de ejemplo.
 
-No publicar precios, métricas, clientes, testimonios o promesas de resultados
-sin aprobación explícita.
+No publicar precios, métricas, clientes, testimonios o promesas de resultados sin aprobación explícita.
 
 ## Desarrollo local
-
-El sitio es estático. Desde la raíz del repositorio:
 
 ```bash
 cd KrzTech/Landing
@@ -139,70 +124,44 @@ python3 -m http.server 8080
 
 Abrir `http://127.0.0.1:8080`.
 
-No abrir únicamente el archivo con `file://` para la validación final: usar un
-servidor local permite comprobar las rutas relativas de los recursos.
-
 ## Verificación antes de publicar
 
 Comprobar como mínimo:
 
-- carga de las tres imágenes;
-- navegación de todos los enlaces internos;
-- apertura correcta de WhatsApp, Instagram y MiCaja;
-- textos alternativos de las imágenes;
+- carga de las tres imágenes existentes;
+- correcta visualización del dashboard demostrativo de MiReserva;
+- navegación interna;
+- enlaces a WhatsApp, Instagram y MiCaja;
 - legibilidad en escritorio y móvil;
 - ausencia de desbordamiento horizontal;
-- tamaño adecuado de botones y capturas;
+- tamaño adecuado de botones y textos;
 - metadatos SEO y sociales;
 - consola del navegador sin errores.
 
-Si se usa un validador HTML, distinguir problemas estructurales de reglas de
-estilo opcionales, como el formato de etiquetas vacías o estilos inline ya
-existentes.
-
 ## Publicación segura
 
-1. Actualizar `main`.
+1. Actualizar `main` local o remotamente.
 2. Crear una rama nueva.
-3. Modificar `KrzTech/Landing/index.html` o sus recursos.
-4. Probar localmente en escritorio y móvil.
-5. Subir la rama y abrir un Pull Request contra `main`.
+3. Modificar `KrzTech/Landing/index.html` y, si corresponde, este README.
+4. Validar escritorio y móvil.
+5. Abrir Pull Request contra `main`.
 6. Revisar la vista previa de Vercel.
 7. Fusionar únicamente después de aprobar la vista previa.
-8. Confirmar que Vercel creó un despliegue de producción para `main`.
+8. Confirmar el despliegue de producción de `main`.
 
-Si el merge no genera un nuevo despliegue de producción:
+Si el merge no genera un despliegue de producción, comprobar en Vercel que **Production Branch** sea `main` y que el Root Directory sea `KrzTech/Landing`.
 
-1. comprobar en Vercel que **Production Branch** sea `main`;
-2. verificar que el directorio raíz sea `KrzTech/Landing`;
-3. como acción puntual, promover la vista previa aprobada a producción.
-
-No confundir un despliegue **Preview** de una rama con el despliegue
-**Production**.
-
-## Contexto para futuras modificaciones
-
-Revisar en este orden:
-
-1. este README;
-2. `KrzTech/Landing/index.html`;
-3. las imágenes de `KrzTech/Landing/assets`;
-4. la vista previa responsive;
-5. la configuración del proyecto en Vercel.
-
-Decisiones ya tomadas:
+## Decisiones vigentes
 
 - la rama productiva es `main`;
 - la landing se despliega en Vercel;
-- MiCaja y Pedidos360 son los productos centrales;
-- MiCaja debe comunicar sus modalidades de escritorio y web;
-- Pedidos360 debe describirse mediante su flujo comercial;
-- la identidad usa azul marino, crema y naranja;
-- no deben inventarse logos, funciones o pruebas sociales;
-- las capturas de MiCaja deben ser reales y estar anonimizadas;
-- la captura de Pedidos360 debe identificarse como ilustrativa.
+- **MiReserva y MiCaja son los dos productos principales**;
+- Pedidos360 queda como producto secundario;
+- MiReserva se muestra con una demo HTML/CSS con datos ficticios;
+- MiCaja usa capturas reales anonimizadas;
+- Pedidos360 usa una imagen ilustrativa;
+- la comunicación debe vender resultado y simplicidad, no tecnología por sí sola.
 
 ## Licencia
 
-Antes de distribuir o reutilizar el proyecto fuera de KRZTech, definir y agregar
-una licencia.
+Antes de distribuir o reutilizar el proyecto fuera de KRZTech, definir y agregar una licencia.
